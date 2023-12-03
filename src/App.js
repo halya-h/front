@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import Auth from './components/Auth.js'
+import Calculation from './components/Calculation.js'
+import { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(null)
+    const authToken = cookies.AuthToken
+    const userEmail = cookies.Email
+
+    return (
+        <div>
+            {!authToken && <Auth/>}
+            {authToken && <Calculation/>}
+
+        </div>
+    )
 }
 
-export default App;
+export default App
+
